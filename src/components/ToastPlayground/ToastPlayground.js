@@ -19,10 +19,12 @@ function ToastPlayground() {
       return filteredToasts;
     });
   }
-  function addToast() {
+  function addToast(event) {
+    event.preventDefault();
     setToasts((previousToasts) => {
       return [...previousToasts, { variant, message, id: crypto.randomUUID() }];
     });
+    setVariant(VARIANT_OPTIONS[0])
   }
   return (
     <div className={styles.wrapper}>
@@ -35,7 +37,7 @@ function ToastPlayground() {
         <ToastShelf toasts={toasts} dismissToast={dismissToast} />
       )}
 
-      <div className={styles.controlsWrapper}>
+      <form onSubmit={(event) => addToast(event)}className={styles.controlsWrapper}>
         <div className={styles.row}>
           <label
             htmlFor="message"
@@ -77,10 +79,10 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button onClick={addToast}>Pop Toast!</Button>
+            <Button >Pop Toast!</Button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
