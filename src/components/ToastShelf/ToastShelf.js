@@ -3,7 +3,7 @@ import React from "react";
 import Toast from "../Toast";
 import styles from "./ToastShelf.module.css";
 
-function ToastShelf({ toasts, dismissToast }) {
+function ToastShelf({ toasts }) {
   return (
     <ol className={styles.wrapper}>
       {toasts.map(({ variant, message, id }) => {
@@ -13,7 +13,6 @@ function ToastShelf({ toasts, dismissToast }) {
               variant={variant}
               message={message}
               id={id}
-              dismissToast={dismissToast}
             />
           </li>
         );
