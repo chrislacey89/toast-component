@@ -9,16 +9,15 @@ import { ToastContext } from "../ToastProvider/ToastProvider";
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
-  const [message, setMessage] = useState('')
-  const { toasts, addToast } =
-    useContext(ToastContext);
+  const [message, setMessage] = useState("");
+  const { toasts, addToast } = useContext(ToastContext);
   const [variant, setVariant] = useState(VARIANT_OPTIONS[0]);
 
-  function handleSubmit(event){
-    addToast(event, variant, message)
-    setMessage('')
-    setVariant(VARIANT_OPTIONS[0])
-
+  function handleSubmit(event) {
+    event.preventDefault();
+    addToast(variant, message);
+    setMessage("");
+    setVariant(VARIANT_OPTIONS[0]);
   }
   return (
     <div className={styles.wrapper}>
@@ -27,13 +26,9 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      {toasts.length > 0 && (
-        <ToastShelf toasts={toasts} />
-      )}
+      {toasts.length > 0 && <ToastShelf toasts={toasts} />}
 
-      <form
-        onSubmit={handleSubmit}
-        className={styles.controlsWrapper}>
+      <form onSubmit={handleSubmit} className={styles.controlsWrapper}>
         <div className={styles.row}>
           <label
             htmlFor="message"
